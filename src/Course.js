@@ -14,10 +14,9 @@ class Course extends React.Component {
           <Card.Subtitle className="mb-2 text-muted">{this.props.data.number} - {this.getCredits()}</Card.Subtitle>
         </Card.Body>
 
-
-        <DropdownButton id="dropdown-basic-button" title="Sections">
-          {this.getSections()}
-        </DropdownButton>
+        <div>
+         {this.getSections()}
+        </div>
 
         <Button variant="primary" onClick={() => alert(this.props.data.name)}>Add to cart</Button>
       </Card>
@@ -33,49 +32,40 @@ class Course extends React.Component {
 
   getSections = () => {
     let sections = []
-    let subsections = []
     let i = 0;
-    console.log(this.props.data.sections);
 
     for(const section of Object.entries(this.props.data.sections)) {
-      sections.push (
-        <Dropdown.Item as="button" >{section[0]}</Dropdown.Item>
-      )
-      // for(const subsection of Object.entries({section[0]}.subsections)) {
-      //   subsections.push (
-      //     // <Dropdown.Item as="button" onClick={this.displaySubsections}>{section[0]}</Dropdown.Item>
-      //   )
-      // }
+      if (section[0] !== '') {
+        sections.push (
+          <DropdownButton id="dropdown-basic-button" title={section[0]}>
+            No discussion
+          </DropdownButton>
+        )
+      } else {
+        sections.push (
+          <DropdownButton id="dropdown-basic-button" title={section[0]}>
+            {this.getSubsections()}
+          </DropdownButton>
+        )
+      }
     }
     return sections;
   }
+  
 
-  // displaySubsections = () => {
-  //   let sections = []
-  //   let subsections = []
-  //   for(const section of Object.entries(this.props.data.sections)) {
-  //     sections.push (
-  //       <Dropdown.Item as="button" onClick={this.displaySubsections}>{section[0]}</Dropdown.Item>
-  //     )
-  //     for(const subsection of Object.entries(section[0].subsections)) {
-  //       subsections.push (
-  //         <Dropdown.Item as="button" onClick={this.displaySubsections}>{section[0]}</Dropdown.Item>
-  //       )
-  //     }
-  //   }
-  //   // let subsections = []
-  //   // let i = 0;
-  //   // console.log(this.props.data.sections);
-
-  //   // for(const section of Object.entries(this.props.data.sections) {
+  getSubsections = () => {
+    let subsections = []
+    for(const section of Object.entries(this.props.data.sections)) {
       
-  //   //   subsections.push (
-  //   //     <Dropdown.Item as="button" onClick={this.select}>{section[0]}</Dropdown.Item>
-  //   //   )
-  //   //   i++;
-  //   // }
-  //   return sections;
-  // }
+      for(const subsection of Object.entries(section[1].subsections)) {
+        console.log(subsection[0]);
+        subsections.push (
+          <Dropdown.Item as="button">{subsection[0]}</Dropdown.Item>
+        )
+      }
+    }
+    return subsections;
+  }
 
   handleClick = () => {
   }
