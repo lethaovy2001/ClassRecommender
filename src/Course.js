@@ -18,7 +18,7 @@ class Course extends React.Component {
          {this.getSections()}
         </div>
 
-        <Button variant="primary" onClick={() => alert(this.props.data.name)}>Add to cart</Button>
+        <Button variant="primary" style={{width: '30%'}} onClick={() => alert(this.props.data.name)}>Add All</Button>
       </Card>
     )
   }
@@ -35,39 +35,29 @@ class Course extends React.Component {
     let i = 0;
 
     for(const section of Object.entries(this.props.data.sections)) {
-      if (section[0] !== '') {
-        sections.push (
-          <DropdownButton id="dropdown-basic-button" title={section[0]}>
-            No discussion
-          </DropdownButton>
-        )
-      } else {
-        sections.push (
-          <DropdownButton id="dropdown-basic-button" title={section[0]}>
-            {this.getSubsections()}
-          </DropdownButton>
-        )
-      }
+      sections.push (
+        <DropdownButton id="dropdown-basic-button" title={section[0]}>
+          {this.getSubsections(section)}
+        </DropdownButton>
+      )
     }
     return sections;
   }
   
 
-  getSubsections = () => {
+  getSubsections(section) {
     let subsections = []
-    for(const section of Object.entries(this.props.data.sections)) {
+    subsections.push (
+      <Dropdown.Item as="button">{section[0]}</Dropdown.Item>
+    )
       
-      for(const subsection of Object.entries(section[1].subsections)) {
-        console.log(subsection[0]);
-        subsections.push (
-          <Dropdown.Item as="button">{subsection[0]}</Dropdown.Item>
-        )
-      }
+    for(const subsection of Object.entries(section[1].subsections)) {
+      console.log(subsection[0]);
+      subsections.push (
+        <Dropdown.Item as="button">{subsection[0]}</Dropdown.Item>
+      )
     }
     return subsections;
-  }
-
-  handleClick = () => {
   }
 }
 
