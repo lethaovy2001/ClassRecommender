@@ -1,12 +1,8 @@
-# Assignment: React 2 (2 Points Total)
+# Assignment: React 3 (6 Points Total)
 
-This assignment is meant to introduce you to more features of React, e.g. states, props, more modularized components etc... This project is the 2nd of a 4 part React project. 
+This assignment is meant to introduce you to more features of React. This project is the third of a four part React project in which you will build a course scheduling application. This application uses a limited quantity of modified data from the UW Madison course information database.
 
-## Overview
-
-You will be continuing building a **course enrolling/scheduling application** based on a limited number of modified data from the UW-Madison course information database.
-
-Note that you could choose to use your **previous assignment** as a boilerplate/starting point for this assignment. But remember to copy them into this folder since you still need to commit to this react2 GitHub repository.
+With this assignment, you have two options for the project you build. Option 1 is a recommender system and Option 2 is a planner system.
 
 ## Course data
 
@@ -49,6 +45,7 @@ The course data is being fetched from `https://mysqlcs639.cs.wisc.edu:5000/class
 - Each course has exactly one subject
 
 ```
+<<<<<<< HEAD
 Your project must be able to accept any data(edge cases such as empty fields) that fits the above format with the data fetched from https://mysqlcs639.cs.wisc.edu:5000/classes/
 ```
 
@@ -118,6 +115,67 @@ The user should be able to switch the tag logic between the two methods describe
 ## General (0.25 points)
 
 You will be graded on User Experience and Code Quality. See Canvas rubric for more details.
+=======
+Your project must be able to accept any data with the same format as above and the data located at https://mysqlcs639.cs.wisc.edu:5000/classes/
+```
+
+# Recommender
+
+## Problem 1 (1.25 points)
+
+- Fetch data from server `https://mysqlcs639.cs.wisc.edu/students/5022025924/classes/completed`
+- Create a new component to represent previously taken courses. This component might look somewhat like the Course component, but it will be simpler and won’t have options to add the course to the cart.
+- Create a new component to hold the previously taken courses. Make this component accessible from the app.
+  
+## Problem 2 (1.25 points)
+
+- Create a component for rating a specific course.
+- Allow the user to rate courses they have already taken.
+
+## Problem 3 (1.25 points)
+
+- Generate a list of interest areas based on the course data (maybe look at subjects and keywords)
+- Create a component for the user to select interest areas as defined in step 1.
+- Make this component available to the user.
+
+## Problem 4 (1.25 points)
+
+- Create the recommender algorithm that takes in the rated courses and interest areas. Search through subjects and keywords to find the courses most similar to the highly rated courses and the courses that match the most interest areas
+- Display the recommended courses to the user. (Maybe show a few recommended courses or sort all courses by their recommendation score)
+
+## General (1 point)
+
+- Projects will be graded on the general usability and design of the system. You should consider the way the users navigate around the application, and other concepts covered in design lecture.
+
+---
+
+# Planner
+
+## Problem 1 (2 points)
+
+- Create a new planner view
+- Create a sidebar component for this planner view that displays all of the courses, sections, and subsections in the cart with with a way for the user to select each one
+- Store the data of what is selected to make the selections related (if a course is selected, all of its sections and subsections will also be selected)
+
+## Problem 2 (1 point)
+
+- Create a function to generate all of the possible schedules based on the data from planner's sidebar
+
+## Problem 3 (2 points)
+
+- With the provided component, create a schedule component that displays a generated schedule
+- Create a way for the user to view all generated schedules
+
+## Pseudocode for schedule generation
+
+![pseudocode](./docs/pseudocode.jpg)
+- Now, timeBlocks contains a list for each course in which one of the section-subsection pairs must be selected to schedule. Iterate through all of these possibilities and add to schedules if there are no conflicts
+
+## General (1 point)
+- Projects will be graded on the general usability and design of the system. You should consider the way the users navigate around the application, and other concepts covered in design lecture.
+
+---
+>>>>>>> 7fbcba68ff5aac291c02d7729a4d0a76cf5e2c4d
 
 ## Styling and npm packages
 
@@ -125,6 +183,7 @@ You are allowed and encouraged to use [react-bootstrap](https://react-bootstrap.
 
 If you would like to use additional npm packages, ask one of the TAs or Peer Mentors for permission.
 
+<<<<<<< HEAD
 We do not have strict requirements for commenting or code styles. Rather, we have an expectation of general reasonable code. For example:
     
 One-letter variables are generally not a good idea, unless it is an indexer like i.
@@ -142,6 +201,9 @@ We have included the readme files for the next two react assignments, which will
 [React 3 readme](/docs/react3_readme.md)
 
 [React 4 readme](/docs/react4_readme.md)
+=======
+You will be graded on the content you display and the style in which you display it, as well as your code quality.
+>>>>>>> 7fbcba68ff5aac291c02d7729a4d0a76cf5e2c4d
 
 ---
 
