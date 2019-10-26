@@ -3,8 +3,9 @@ class SearchAndFilter {
     if(search !== '') {
       let coursesAfterSearch = [];
 
-      for(const course of Object.values(courses)) {
-        for(const keyword of course.keywords) {
+      for(const course of Object.entries(courses)) {
+        console.log("SEARCH_AND_FILTER: " + course[0]);
+        for(const keyword of course[1].keywords) {
           if(keyword.includes(search)) {
             coursesAfterSearch.push(course);
             break;
