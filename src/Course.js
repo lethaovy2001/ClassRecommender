@@ -24,11 +24,12 @@ class Course extends React.Component {
           <Card.Subtitle className="mb-2 text-muted">{this.props.data.number} - {this.getCredits()}</Card.Subtitle>
         </Card.Body>
 
-        <div>
+        {/* Bad design*/}
+        {/* <div>
          {this.getSections()}
-        </div>
+        </div> */}
 
-        <Button variant="primary" style={{width: '30%'}} onClick={() => alert(this.props.data.name)}>All</Button>
+        {/* <Button variant="primary" style={{width: '30%'}} onClick={() => alert(this.props.data.name)}>All</Button> */}
       </Card>
     )
   }

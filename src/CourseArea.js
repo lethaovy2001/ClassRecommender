@@ -22,7 +22,6 @@ class CourseArea extends React.Component {
 
   callBackData = (data) => {
     this.setState({selectedCourses: data });
-    console.log(this.state.selectedCourses)
   }
 
   render() {
