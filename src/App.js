@@ -64,29 +64,12 @@ class App extends React.Component {
   getPreviousCourses(data, prevCourses) {
     let result = [];
     for (const numKey of Object.values(prevCourses.data)) {
-      console.log("***Course[1]: " + data);
       for (const course of Object.entries(data)) {
-        console.log("SEARCH_AND_FILTER: " + course[0]);
-        if (numKey === course.name) {
-          result.push(course);
-          console.log("***COurse: " + course.name);
+        if (numKey === course[0]) {
+          result.push(course[1]);
         }
       }
     }
-
-    // for(const course of Object.entries(courses)) {
-    //   console.log("SEARCH_AND_FILTER: " + course[0]);
-    //   for(const keyword of course[1].keywords) {
-    //     if(keyword.includes(search)) {
-    //       coursesAfterSearch.push(course);
-    //       break;
-    //     }
-    //   }
-    // }
-
-    // for (const temp of Object.entries(result)) {
-    //   console.log("LALALALA: " + temp);
-    // }
    
     return result;
     
