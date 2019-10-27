@@ -64,6 +64,7 @@ class Course extends React.Component {
       subsections.push (
         <Dropdown.Item as="button" onSelect={this.addToCart} key={subsection}>{subsection[0]}</Dropdown.Item>
       )
+
     }
     return subsections;
   }

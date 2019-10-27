@@ -97,17 +97,17 @@ class App extends React.Component {
           <Tab eventKey="search" title="Search Course">
             <Sidebar setCourses={(courses) => this.setCourses(courses)} courses={this.state.allCourses} subjects={this.state.subjects}/>
               <div style={{marginLeft: '20vw'}}>
-                <CourseArea data={this.state.filteredCourses}/>
+                <CourseArea data={this.state.filteredCourses} likeStatus={false}/>
               </div>
           </Tab>
           <Tab eventKey="cart" title="Cart">
-            <div>
+            {/* <div>
               <CourseArea data={this.state.filteredCourses} />
-            </div>
+            </div> */}
           </Tab>
           <Tab eventKey="prevCourses" title="Previous Courses">
             <div>
-              <CourseArea setCourses={(courses) => this.setCourses(courses)} data={this.state.previousCourses} />
+              <CourseArea data={this.state.previousCourses} likeStatus={true} />
             </div>
           </Tab>
         </Tabs>
