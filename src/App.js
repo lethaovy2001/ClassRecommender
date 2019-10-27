@@ -16,7 +16,9 @@ class App extends React.Component {
       allCourses: {},
       filteredCourses: {},
       subjects: [],
-      previousCourses: {}
+      previousCourses: {},
+      recommendedCourses: {},
+      likedCourses:{}
     };
   }
 
@@ -32,21 +34,10 @@ class App extends React.Component {
       subjects: this.getSubjects(data1),
       previousCourses: this.getPreviousCourses(data1, data2)
     }));
+  }
 
-    // Promise.all([
-    //   fetch("https://mysqlcs639.cs.wisc.edu/classes/"),
-    //   fetch("https://mysqlcs639.cs.wisc.edu/students/5022025924/classes/completed/"),
-    // ]).then(([data, prev]) => {
-    //   this.setState({allCourses: data, filteredCourses: data, subjects: this.getSubjects(data), previousCourses: this.getPreviousCourses(data, prev)})
-    // })
-
-    // fetch('https://mysqlcs639.cs.wisc.edu/classes/').then(
-    //   res => res.json()
-    // ).then(data => this.setState({ allCourses: data, filteredCourses: data, subjects: this.getSubjects(data) }));
-
-    // fetch('https://mysqlcs639.cs.wisc.edu/students/5022025924/classes/completed/').then(
-    //   res => res.json()
-    // ).then(prev => this.setState({previousCourses: this.getPreviousCourses(prev)}));
+  updateLikedCourses(course) {
+    this.state.likedCourses.push(course);
   }
 
   getSubjects(data) {
@@ -72,7 +63,10 @@ class App extends React.Component {
     }
    
     return result;
-    
+  }
+
+  getRecommendedCourses() {
+
   }
 
   setCourses(courses) {
@@ -82,6 +76,7 @@ class App extends React.Component {
   setAddedCourseToCart(courses) {
     this.setState({ addedCourses: courses })
   }
+
 
   render() {
     return (
@@ -107,8 +102,13 @@ class App extends React.Component {
           </Tab>
           <Tab eventKey="prevCourses" title="Previous Courses">
             <div>
-              <CourseArea data={this.state.previousCourses} likeStatus={true} />
+              <CourseArea data={this.state.previousCourses} likeStatus={true}/>
             </div>
+          </Tab>
+          <Tab eventKey="recommender" title="Recommender">
+            <div>
+              <CourseArea data={this.state.recommendedCourses}/>
+             </div>
           </Tab>
         </Tabs>
       </>

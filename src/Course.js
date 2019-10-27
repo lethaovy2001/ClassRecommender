@@ -1,7 +1,7 @@
 import React from 'react';
 import './App.css';
 import Card from 'react-bootstrap/Card';
-import Button from 'react-bootstrap/Button'
+// import Button from 'react-bootstrap/Button'
 import DropdownButton from 'react-bootstrap/DropdownButton'
 import Dropdown from 'react-bootstrap/Dropdown'
 
@@ -73,8 +73,6 @@ class Course extends React.Component {
     this.setState({addedCourses:{...this.state.addedCourses,[this.props.data.name]: this.props.data}});
     console.log(this.state.addedCourses)
   }
-  
-
   
 }
 
