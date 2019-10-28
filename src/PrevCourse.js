@@ -10,14 +10,7 @@ class PrevCourse extends React.Component {
         this.state = {
             likeStatus: ""
         };
-        
     }
-
-    // sendData = () => {
-    //     if (this.state.likeStatus === "👍") {
-    //         this.props.callbackFromPrev(this.props.data);
-    //     }
-    // }
 
     render() {
         return (
@@ -32,8 +25,14 @@ class PrevCourse extends React.Component {
         )
     }
 
-    callBackData = (data) => {
-        this.setState({likeStatus: data});
+    callBackData = (status) => {
+        if (status !== "null") {
+            console.log(status);
+            this.setState({likeStatus: status});
+            if (status === "👍") {
+                this.props.callbackPrevCourse(this.props.data);
+            }
+        }
     }
 
     getCredits() {
