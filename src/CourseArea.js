@@ -2,6 +2,7 @@ import React from 'react';
 import './App.css';
 import Course from './Course';
 import PrevCourse from './PrevCourse';
+import Button from 'react-bootstrap/Button'
 
 class CourseArea extends React.Component {
   constructor(props) {
@@ -36,6 +37,10 @@ class CourseArea extends React.Component {
     console.log(this.state.likedCourses);
   }
 
+  sendData() {
+    this.props.callBackFromCourseArea(this.state.likedCourses);
+  }
+
   render() {
     if (this.props.likeStatus === false) {
       return (
@@ -47,6 +52,7 @@ class CourseArea extends React.Component {
       return (
         <div style={{margin: '5px'}}>
           {this.getPrevCourses()}
+          <Button variant="primary" style={{ width: '40%', marginRight: '15px'}} onClick={() => {this.sendData()}}>Done</Button>
         </div>
       )
     }
