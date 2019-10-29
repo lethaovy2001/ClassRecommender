@@ -80,8 +80,24 @@ class App extends React.Component {
     this.setState({likedCourses: data})
   }
 
-  callbackFromInterestArea = (subjects) => {
-    this.setState({likedSubjects: subjects});
+  callbackFromInterestArea = (data) => {
+    this.setState({likedSubjects: data});
+
+    let courses = [];
+    for (const course of Object.entries(this.state.allCourses)) {
+      for (const value of data) {
+        if (course[1].subject === value) {
+          courses.push(course[1]);
+        }
+        for (const keyword of course[1].keywords) {
+          if (keyword === value) {
+            courses.push(course[1]);
+          }
+        }
+      }
+    }
+    this.setState({recommendedCourses: courses});
+    
   }
 
   render() {

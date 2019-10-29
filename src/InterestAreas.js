@@ -7,36 +7,41 @@ class InterestAreas extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
-            likedSubjects: []
+            likedSubjectsOrKeywords: []
         };
     }
 
-    handleCheck(subject) {
-        if (!this.state.likedSubjects.includes(subject)) {
-            this.state.likedSubjects.push(subject);
+    handleCheck(value) {
+        if (!this.state.likedSubjectsOrKeywords.includes(value)) {
+            this.state.likedSubjectsOrKeywords.push(value);
         }
-        console.log(this.state.likedSubjects);
+
+        console.log(this.state.likedSubjectsOrKeywords);
     }
 
     getSubjectOptions() {
-        let subjectOptions = [];
+        let options = [];
         let temp = [];
         for (const course of Object.entries(this.props.data)) {
             let subject = course[1].subject;
-            if (!temp.includes(subject)) {
-                subjectOptions.push(<Button variant="outline-primary" key={subject} onClick={() => this.handleCheck(subject)}>{subject}</Button>);
-                temp.push(subject);
+            for (const keyword of course[1].keywords) {
+                if (!temp.includes(subject)) {
+                    options.push(<Button variant="outline-primary" key={subject} onClick={() => this.handleCheck(subject)}>{subject}</Button>);
+                    temp.push(subject);
+                }
+                if (!temp.includes(keyword)) {
+                    options.push(<Button variant="outline-primary" key={keyword} onClick={() => this.handleCheck(keyword)}>{keyword}</Button>);
+                    temp.push(keyword);
+                }
             }
+            
         }
-        return subjectOptions;
-    }
-
-    callBackData = (data) => {
-
+        return options;
     }
 
     sendData() {
-        this.props.callBack(this.state.likedSubjects);
+        console.log("Before passing: " + this.state.likedSubjectsOrKeywords);
+        this.props.callBack(this.state.likedSubjectsOrKeywords);
     }
 
     render() {
