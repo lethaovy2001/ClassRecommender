@@ -8,6 +8,7 @@ import CourseArea from './CourseArea';
 
 import Tabs from 'react-bootstrap/Tabs'
 import Tab from 'react-bootstrap/Tab'
+import InterestAreas from './InterestAreas';
 
 class App extends React.Component {
   constructor(props) {
@@ -65,10 +66,6 @@ class App extends React.Component {
     return result;
   }
 
-  getRecommendedCourses() {
-
-  }
-
   setCourses(courses) {
     this.setState({ filteredCourses: courses })
   }
@@ -78,8 +75,8 @@ class App extends React.Component {
   }
 
   callBackFromCourseArea = (data) => {
-    // console.log("callBackFromCourseArea " + data)
-    this.setState({ recommendedCourses: data })
+    this.setState({recommendedCourses: data});
+    this.setState({likedCourses: data})
   }
 
   render() {
@@ -108,6 +105,11 @@ class App extends React.Component {
             <div>
               <CourseArea data={this.state.previousCourses} likeStatus={true} callBackFromCourseArea={this.callBackFromCourseArea}/>
             </div>
+          </Tab>
+          <Tab eventKey="interestedArea" title="Interested Area">
+            <div>
+              <InterestAreas data={this.state.likedCourses}/>
+             </div>
           </Tab>
           <Tab eventKey="recommender" title="Recommender">
             <div>

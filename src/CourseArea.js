@@ -8,15 +8,16 @@ class CourseArea extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      likedCourses: []
+      likedCourses: [],
+      isModalOpened: false
     };
   }
 
   getCourses() {
     let courses = [];
-    for(const course of Object.entries(this.props.data)) {
-      courses.push (
-        <Course key={course[0]} data={course[1]}/>
+    for (const course of Object.entries(this.props.data)) {
+      courses.push(
+        <Course key={course[0]} data={course[1]} />
       )
     }
     return courses;
@@ -24,9 +25,9 @@ class CourseArea extends React.Component {
 
   getPrevCourses() {
     let courses = [];
-    for(const course of Object.entries(this.props.data)) {
-      courses.push (
-        <PrevCourse key={course[0]} data={course[1]} callbackPrevCourse={this.callBackData}/>
+    for (const course of Object.entries(this.props.data)) {
+      courses.push(
+        <PrevCourse key={course[0]} data={course[1]} callbackPrevCourse={this.callBackData} />
       )
     }
     return courses;
@@ -39,24 +40,25 @@ class CourseArea extends React.Component {
 
   sendData() {
     this.props.callBackFromCourseArea(this.state.likedCourses);
+    this.setState({ isDoneClicked: true });
   }
 
   render() {
+
     if (this.props.likeStatus === false) {
       return (
-        <div style={{margin: '5px'}}>
+        <div style={{ margin: '5px' }}>
           {this.getCourses()}
         </div>
       )
     } else {
       return (
-        <div style={{margin: '5px'}}>
+        <div style={{ margin: '5px' }}>
           {this.getPrevCourses()}
-          <Button variant="primary" style={{ width: '40%', marginRight: '15px'}} onClick={() => {this.sendData()}}>Done</Button>
+          <Button variant="primary" style={{ width: '33%', marginRight: '15px' }} onClick={() => this.sendData()}>Done</Button>
         </div>
       )
     }
-    
   }
 }
 
