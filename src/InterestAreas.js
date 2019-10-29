@@ -15,13 +15,13 @@ class InterestAreas extends React.Component {
         if (!this.state.likedSubjects.includes(subject)) {
             this.state.likedSubjects.push(subject);
         }
+        console.log(this.state.likedSubjects);
     }
 
     getSubjectOptions() {
         let subjectOptions = [];
         let temp = [];
         for (const course of Object.entries(this.props.data)) {
-            // console.log(course[1].subject);
             let subject = course[1].subject;
             if (!temp.includes(subject)) {
                 subjectOptions.push(<Button variant="outline-primary" key={subject} onClick={() => this.handleCheck(subject)}>{subject}</Button>);
@@ -36,7 +36,7 @@ class InterestAreas extends React.Component {
     }
 
     sendData() {
-
+        this.props.callBack(this.state.likedSubjects);
     }
 
     render() {

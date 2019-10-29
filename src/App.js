@@ -19,7 +19,8 @@ class App extends React.Component {
       subjects: [],
       previousCourses: {},
       recommendedCourses: {},
-      likedCourses:{}
+      likedCourses:{},
+      likedSubjects:[]
     };
   }
 
@@ -79,6 +80,10 @@ class App extends React.Component {
     this.setState({likedCourses: data})
   }
 
+  callbackFromInterestArea = (subjects) => {
+    this.setState({likedSubjects: subjects});
+  }
+
   render() {
     return (
       <>
@@ -108,7 +113,7 @@ class App extends React.Component {
           </Tab>
           <Tab eventKey="interestedArea" title="Interested Area">
             <div>
-              <InterestAreas data={this.state.likedCourses}/>
+              <InterestAreas data={this.state.likedCourses} callBack={this.callbackFromInterestArea}/>
              </div>
           </Tab>
           <Tab eventKey="recommender" title="Recommender">
