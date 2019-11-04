@@ -17,7 +17,8 @@ class App extends React.Component {
       recommendedCourses: {},
       likedCourses:{},
       likedSubjects:[],
-      previousNumCourses: {}
+      previousNumCourses: {}, 
+      savedCourses: {}
     };
   }
 
@@ -34,10 +35,6 @@ class App extends React.Component {
       previousCourses: this.getPreviousCourses(data1, data2),
       previousNumCourses: data2
     }));
-  }
-
-  updateLikedCourses(course) {
-    this.state.likedCourses.push(course);
   }
 
   getSubjects(data) {
@@ -74,7 +71,7 @@ class App extends React.Component {
   }
 
   callBackFromCourseArea = (data) => {
-    this.setState({recommendedCourses: data});
+    // this.setState({recommendedCourses: data});
     this.setState({likedCourses: data})
   }
 
@@ -97,6 +94,14 @@ class App extends React.Component {
     this.setState({recommendedCourses: courses});
   }
 
+  callbackSaveCourses = (data) => {
+    if (this.state.recommendedCourses !== null) {
+      this.setState({recommendedCourses: data});
+      console.log(this.state.recommendedCourses);
+    }
+    this.setState({savedCourses: data})
+  }
+
   render() {
     return (
       <>
@@ -111,17 +116,18 @@ class App extends React.Component {
           <Tab eventKey="search" title="Search Course">
             <Sidebar setCourses={(courses) => this.setCourses(courses)} courses={this.state.allCourses} subjects={this.state.subjects}/>
               <div style={{marginLeft: '20vw'}}>
-                <CourseArea data={this.state.filteredCourses} likeStatus={false} previousData={this.state.previousNumCourses} allCourses={this.state.allCourses}/>
+                <CourseArea data={this.state.filteredCourses} likeStatus={false} enroll={true} previousData={this.state.previousNumCourses} allCourses={this.state.allCourses} callbackSaveCourses={this.callbackSaveCourses}/>
+                {/* <Button variant="primary" style={{ width: '33%', marginLeft: '5px' }} onClick={() => this.()}>Done</Button> */}
               </div>
           </Tab>
           <Tab eventKey="cart" title="Cart">
-            {/* <div>
-              <CourseArea data={this.state.filteredCourses} />
-            </div> */}
+            <div>
+              <CourseArea data={this.state.filteredCourses} likeStatus={false} enroll={false} />
+            </div>
           </Tab>
           <Tab eventKey="prevCourses" title="Previous Courses">
             <div>
-              <CourseArea data={this.state.previousCourses} likeStatus={true} callBackFromCourseArea={this.callBackFromCourseArea}/>
+              <CourseArea data={this.state.previousCourses} likeStatus={true} enroll={false} callBackFromCourseArea={this.callBackFromCourseArea}/>
             </div>
           </Tab>
           <Tab eventKey="interestedArea" title="Interested Area">
@@ -131,7 +137,7 @@ class App extends React.Component {
           </Tab>
           <Tab eventKey="recommender" title="Recommender">
             <div>
-              <CourseArea data={this.state.recommendedCourses} likeStatus={false}/>
+              <CourseArea data={this.state.recommendedCourses} likeStatus={false} enroll={false}/>
              </div>
           </Tab>
         </Tabs>

@@ -40,7 +40,6 @@ class InterestAreas extends React.Component {
     }
 
     sendData() {
-        console.log("Before passing: " + this.state.likedSubjectsOrKeywords);
         this.props.callBack(this.state.likedSubjectsOrKeywords);
     }
 

@@ -4,6 +4,7 @@ import Card from 'react-bootstrap/Card';
 import DropdownButton from 'react-bootstrap/DropdownButton'
 import Dropdown from 'react-bootstrap/Dropdown'
 import Badge from 'react-bootstrap/Badge'
+import Button from 'react-bootstrap/Button'
 
 class Course extends React.Component {
   constructor(props) {
@@ -23,6 +24,8 @@ class Course extends React.Component {
           <Card.Body>
             <Card.Title>{this.props.data.name}</Card.Title>
             <Card.Subtitle className="mb-2 text-muted">{this.props.data.number} - {this.getCredits()}</Card.Subtitle>
+            <Button variant="outline-primary" onClick={() => alert(this.props.data.name)}>Enroll</Button>
+            <Button variant="outline-primary" onClick={() => this.sendSavedCourse()}><span role="img" aria-label="love">❤️</span></Button>
           </Card.Body>
 
           {/* Bad design*/}
@@ -43,12 +46,15 @@ class Course extends React.Component {
             <ul style={{marginBottom: '0px'}}>
               {this.getRequiredRequisites()}
             </ul>
-            
+            <Button variant="outline-primary" onClick={() => this.sendSavedCourse()}><span role="img" aria-label="love">❤️</span></Button>
           </Card.Body>
         </Card>
       )
     }
+  }
 
+  sendSavedCourse() {
+    this.props.callbackCourses(this.props.data); 
   }
 
   getRequiredRequisites() {
