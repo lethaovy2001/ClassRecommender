@@ -2,10 +2,6 @@ import React from 'react';
 import './App.css';
 import Sidebar from './Sidebar';
 import CourseArea from './CourseArea';
-
-// import Modal from 'react-bootstrap/Modal'
-// import Button from 'react-bootstrap/Button'
-
 import Tabs from 'react-bootstrap/Tabs'
 import Tab from 'react-bootstrap/Tab'
 import InterestAreas from './InterestAreas';
@@ -20,7 +16,8 @@ class App extends React.Component {
       previousCourses: {},
       recommendedCourses: {},
       likedCourses:{},
-      likedSubjects:[]
+      likedSubjects:[],
+      previousNumCourses: {}
     };
   }
 
@@ -34,7 +31,8 @@ class App extends React.Component {
       allCourses: data1,
       filteredCourses: data1,
       subjects: this.getSubjects(data1),
-      previousCourses: this.getPreviousCourses(data1, data2)
+      previousCourses: this.getPreviousCourses(data1, data2),
+      previousNumCourses: data2
     }));
   }
 
@@ -97,7 +95,6 @@ class App extends React.Component {
       }
     }
     this.setState({recommendedCourses: courses});
-    
   }
 
   render() {
@@ -114,7 +111,7 @@ class App extends React.Component {
           <Tab eventKey="search" title="Search Course">
             <Sidebar setCourses={(courses) => this.setCourses(courses)} courses={this.state.allCourses} subjects={this.state.subjects}/>
               <div style={{marginLeft: '20vw'}}>
-                <CourseArea data={this.state.filteredCourses} likeStatus={false}/>
+                <CourseArea data={this.state.filteredCourses} likeStatus={false} previousData={this.state.previousNumCourses} allCourses={this.state.allCourses}/>
               </div>
           </Tab>
           <Tab eventKey="cart" title="Cart">

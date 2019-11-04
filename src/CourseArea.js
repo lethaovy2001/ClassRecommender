@@ -9,16 +9,43 @@ class CourseArea extends React.Component {
     super(props);
     this.state = {
       likedCourses: [],
-      isModalOpened: false
+      isModalOpened: false,
+      neededRequisiteCourses: []
     };
   }
 
   getCourses() {
+    let prevCourses = [];
+    let neededRequisitesCourses = [];
     let courses = [];
+
+    if (typeof this.props.previousData !== "undefined") {
+      for (const course of Object.values(this.props.previousData)) {
+        prevCourses = course;
+      }
+    }
+
     for (const course of Object.entries(this.props.data)) {
+      if (typeof this.props.allCourses !== "undefined") {
+        for (const requisites of Object.entries(course[1].requisites)) {
+          for (const requisite of Object.values(requisites[1])) {
+            if (!prevCourses.includes(requisite) && prevCourses.length > 0) {
+              
+                for (const allCourse of Object.entries(this.props.allCourses)) {
+                  if (requisite === allCourse[0]) {
+                    neededRequisitesCourses.push(allCourse[1]);
+                  }
+                }
+              
+            }
+          }
+        }
+      }
+      
       courses.push(
-        <Course key={course[0]} data={course[1]} />
+        <Course key={course[0]} data={course[1]} requireReq={neededRequisitesCourses} />
       )
+      neededRequisitesCourses = [];
     }
     return courses;
   }
@@ -43,6 +70,10 @@ class CourseArea extends React.Component {
     this.setState({ isDoneClicked: true });
   }
 
+  checkIfMeetRequisites(course) {
+
+  }
+
   render() {
 
     if (this.props.likeStatus === false) {
@@ -61,5 +92,7 @@ class CourseArea extends React.Component {
     }
   }
 }
+
+
 
 export default CourseArea;
